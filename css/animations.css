@@ -1,0 +1,68 @@
+/* ==========================================================================
+   SaMax Nepal - Keyframe Animations & FX
+   ========================================================================== */
+
+/* Loader Progress Spinner */
+@keyframes cyber-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-cyber-spin {
+  animation: cyber-spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+/* Floating Badges */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float-badge {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+.animate-float-badge-delayed {
+  animation: float-y 6s ease-in-out 2s infinite;
+}
+
+/* Glowing Border Pulse */
+@keyframes border-shimmer {
+  0%, 100% {
+    border-color: rgba(24, 198, 255, 0.2);
+    box-shadow: 0 0 15px rgba(24, 198, 255, 0.1);
+  }
+  50% {
+    border-color: rgba(79, 227, 255, 0.7);
+    box-shadow: 0 0 30px rgba(79, 227, 255, 0.4);
+  }
+}
+
+.glow-shimmer {
+  animation: border-shimmer 4s ease-in-out infinite;
+}
+
+/* Radar Sweep Line */
+@keyframes radar-scan {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-sweep-anim {
+  animation: radar-scan 3.5s linear infinite;
+  transform-origin: 0% 0%;
+}
+
+/* Text Glow Pulsing */
+@keyframes text-glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(79, 227, 255, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(79, 227, 255, 0.8);
+  }
+}
+
+.animate-text-glow {
+  animation: text-glow-pulse 3s infinite;
+}
