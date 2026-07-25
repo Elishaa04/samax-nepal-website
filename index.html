@@ -1180,35 +1180,33 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label for="contact-name" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Full Name *</label>
-                <input type="text" id="contact-name" required placeholder="John Doe" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
+                <input type="text" id="contact-name" name="name" required placeholder="John Doe" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
               </div>
               <div>
                 <label for="contact-email" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Email Address *</label>
-                <input type="email" id="contact-email" required placeholder="john@company.com" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
+                <input type="email" id="contact-email" name="email" required placeholder="john@company.com" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
               </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label for="contact-phone" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Phone Number *</label>
-                <input type="tel" id="contact-phone" required placeholder="+977-9800000000" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
+                <input type="tel" id="contact-phone" name="phone" required placeholder="+977-9800000000" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
               </div>
               <div>
-                <label for="contact-service" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Service Category *</label>
-                <select id="contact-service" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
-                  <option value="map">Digital Map Delivery</option>
-                  <option value="repeaters">Indoor / Outdoor Repeaters</option>
-                  <option value="fiber">Fiber Optic Infrastructure</option>
-                  <option value="rf">RF Planning & Drive Testing</option>
-                  <option value="manpower">Technical Manpower Deployment</option>
-                  <option value="wifi">Enterprise Wi-Fi & Networking</option>
-                </select>
+                <label for="contact-company" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Company Name</label>
+                <input type="text" id="contact-company" name="company" placeholder="Company / Organization" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
               </div>
             </div>
 
             <div>
-              <label for="contact-message" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Project Brief *</label>
-              <textarea id="contact-message" rows="4" required placeholder="Describe technical scope, timeline, and location..." class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors"></textarea>
+              <label for="contact-subject" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Subject / Inquiry Type *</label>
+              <input type="text" id="contact-subject" name="subject" required placeholder="Telecom Tower Project / Fiber Optic Inquiry" class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors">
+            </div>
+
+            <div>
+              <label for="contact-message" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Project Brief / Message *</label>
+              <textarea id="contact-message" name="message" rows="4" required placeholder="Describe technical scope, timeline, and location..." class="w-full bg-slate-900/80 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none transition-colors"></textarea>
             </div>
 
             <button type="submit" class="btn-primary-cyan w-full py-4 rounded-xl text-xs uppercase tracking-wider font-semibold shadow-2xl flex items-center justify-center gap-2">
@@ -1389,6 +1387,8 @@
       easing: 'ease-out-cubic'
     });
   </script>
+  <!-- EmailJS Browser SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

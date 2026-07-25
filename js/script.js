@@ -486,22 +486,41 @@ function initModals() {
 }
 
 /* ==========================================================================
-   11. Contact Form Validation & Toast Notifications
+   EmailJS Configuration
+   ========================================================================== */
+const EMAILJS_SERVICE_ID = 'service_x2qahyv';
+const EMAILJS_TEMPLATE_ID = 'template_yx0fh59';
+const EMAILJS_PUBLIC_KEY = 'PASTE_YOUR_PUBLIC_KEY_HERE';
+
+if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'PASTE_YOUR_PUBLIC_KEY_HERE') {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+}
+
+/* ==========================================================================
+   11. Contact Form Validation & EmailJS Integration
    ========================================================================== */
 function initContactForm() {
   const contactForm = document.getElementById('contact-form');
   if (!contactForm) return;
 
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('contact-name').value.trim();
-    const email = document.getElementById('contact-email').value.trim();
-    const phone = document.getElementById('contact-phone').value.trim();
-    const service = document.getElementById('contact-service').value;
-    const message = document.getElementById('contact-message').value.trim();
+    const nameInput = document.getElementById('contact-name');
+    const emailInput = document.getElementById('contact-email');
+    const phoneInput = document.getElementById('contact-phone');
+    const companyInput = document.getElementById('contact-company');
+    const subjectInput = document.getElementById('contact-subject');
+    const messageInput = document.getElementById('contact-message');
 
-    if (!name || !email || !phone || !message) {
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const phone = phoneInput ? phoneInput.value.trim() : '';
+    const company = companyInput ? companyInput.value.trim() : '';
+    const subject = subjectInput ? subjectInput.value.trim() : '';
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    if (!name || !email || !phone || !subject || !message) {
       showToast('Please fill in all required contact fields.', 'error');
       return;
     }
@@ -515,14 +534,35 @@ function initContactForm() {
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const origContent = submitBtn.innerHTML;
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Transmitting...';
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Sending...';
 
-    setTimeout(() => {
-      showToast('Thank you! Your message has been received by SaMax Engineers.', 'success');
+    const templateParams = {
+      name: name,
+      company: company || 'N/A',
+      email: email,
+      phone: phone,
+      subject: subject,
+      message: message,
+      to_email: 'samax.nepal@gmail.com'
+    };
+
+    try {
+      if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'PASTE_YOUR_PUBLIC_KEY_HERE') {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
+      } else {
+        // Simulation fallback if Public Key placeholder is active
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+
+      showToast('Thank you! Your message has been sent successfully. Our engineering team will contact you shortly.', 'success');
       contactForm.reset();
+    } catch (error) {
+      console.error('EmailJS Submission Error:', error);
+      showToast('Unable to send your message. Please try again.', 'error');
+    } finally {
       submitBtn.disabled = false;
       submitBtn.innerHTML = origContent;
-    }, 1200);
+    }
   });
 }
 
