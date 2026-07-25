@@ -488,13 +488,8 @@ function initModals() {
 /* ==========================================================================
    EmailJS Configuration
    ========================================================================== */
-const EMAILJS_SERVICE_ID = 'service_x2qahyv';
-const EMAILJS_TEMPLATE_ID = 'template_yx0fh59';
-const EMAILJS_PUBLIC_KEY = 'PASTE_MY_PUBLIC_KEY_HERE';
-
-// Initialize EmailJS SDK ONCE
 if (typeof emailjs !== 'undefined') {
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+  emailjs.init("75mp6v-iJVuzjbpes");
 }
 
 /* ==========================================================================
@@ -548,15 +543,21 @@ function initContactForm() {
 
     try {
       if (typeof emailjs === 'undefined') {
-        throw new Error('EmailJS SDK is not loaded.');
+        throw new Error('EmailJS SDK is not loaded on page.');
       }
 
-      // Execute emailjs.send ONCE
+      console.log("EmailJS initialized");
+      console.log("Sending with:", {
+        service: "service_x2qahyv",
+        template: "template_yx0fh59",
+        publicKey: "75mp6v-iJVuzjbpes"
+      });
+
+      // Execute emailjs.send ONCE matching official SDK documentation
       const response = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
+        "service_x2qahyv",
+        "template_yx0fh59",
+        templateParams
       );
 
       console.log('EmailJS Success Response:', response);
@@ -565,8 +566,16 @@ function initContactForm() {
       showToast('Thank you! Your message has been sent successfully. Our engineering team will contact you shortly.', 'success');
       contactForm.reset();
     } catch (error) {
-      // Log full error in browser console for debugging
-      console.error('EmailJS Submission Error Full Trace:', error);
+      // Print complete error details to browser console
+      console.error('EmailJS Error:', error);
+      console.log('EmailJS Error Object:', error);
+      if (error && error.text) {
+        console.log('EmailJS Error Text:', error.text);
+      }
+      if (error && error.status) {
+        console.log('EmailJS Error Status:', error.status);
+      }
+
       showToast('Unable to send your message. Please try again.', 'error');
     } finally {
       submitBtn.disabled = false;
