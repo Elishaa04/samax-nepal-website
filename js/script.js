@@ -490,9 +490,10 @@ function initModals() {
    ========================================================================== */
 const EMAILJS_SERVICE_ID = 'service_x2qahyv';
 const EMAILJS_TEMPLATE_ID = 'template_yx0fh59';
-const EMAILJS_PUBLIC_KEY = 'PASTE_YOUR_PUBLIC_KEY_HERE';
+const EMAILJS_PUBLIC_KEY = 'PASTE_MY_PUBLIC_KEY_HERE';
 
-if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'PASTE_YOUR_PUBLIC_KEY_HERE') {
+// Initialize EmailJS SDK ONCE
+if (typeof emailjs !== 'undefined') {
   emailjs.init(EMAILJS_PUBLIC_KEY);
 }
 
@@ -542,22 +543,30 @@ function initContactForm() {
       email: email,
       phone: phone,
       subject: subject,
-      message: message,
-      to_email: 'samax.nepal@gmail.com'
+      message: message
     };
 
     try {
-      if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'PASTE_YOUR_PUBLIC_KEY_HERE') {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
-      } else {
-        // Simulation fallback if Public Key placeholder is active
-        await new Promise(resolve => setTimeout(resolve, 1000));
+      if (typeof emailjs === 'undefined') {
+        throw new Error('EmailJS SDK is not loaded.');
       }
 
+      // Execute emailjs.send ONCE
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      console.log('EmailJS Success Response:', response);
+
+      // Display success toast ONLY after emailjs.send succeeds
       showToast('Thank you! Your message has been sent successfully. Our engineering team will contact you shortly.', 'success');
       contactForm.reset();
     } catch (error) {
-      console.error('EmailJS Submission Error:', error);
+      // Log full error in browser console for debugging
+      console.error('EmailJS Submission Error Full Trace:', error);
       showToast('Unable to send your message. Please try again.', 'error');
     } finally {
       submitBtn.disabled = false;
