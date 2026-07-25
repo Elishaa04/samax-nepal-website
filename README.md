@@ -4,11 +4,7 @@ A modern, responsive, and professional corporate website developed for **SaMax N
 
 ## 🚀 Live Demo
 
-https://YOUR-VERCEL-LINK.vercel.app
-
-*(Update this with your custom domain once it is live.)*
-
----
+https://samax-nepal-website.vercel.app/
 
 ## ✨ Features
 
@@ -24,8 +20,6 @@ https://YOUR-VERCEL-LINK.vercel.app
 - GitHub Version Control
 - Vercel Deployment
 
----
-
 ## 🛠️ Tech Stack
 
 - HTML5
@@ -35,11 +29,9 @@ https://YOUR-VERCEL-LINK.vercel.app
 - Git & GitHub
 - Vercel
 
----
-
 ## 📂 Project Structure
 
-```
+
 samax-nepal/
 │
 ├── assets/
@@ -49,15 +41,13 @@ samax-nepal/
 ├── index.html
 ├── README.md
 └── ...
-```
 
----
 
 ## 📧 Contact Form
 
 The contact form is integrated with **EmailJS**, allowing users to send inquiries directly without requiring a backend server.
 
----
+
 
 ## 📱 Responsive Design
 
@@ -68,13 +58,11 @@ The website is fully responsive and optimized for:
 - Tablet
 - Mobile Devices
 
----
 
 ## 🌍 Deployment
 
 This project is deployed on **Vercel**.
 
----
 
 ## 📌 Future Improvements
 
@@ -85,7 +73,6 @@ This project is deployed on **Vercel**.
 - WhatsApp Integration
 - Live Chat Support
 
----
 
 ## 👨‍💻 Developed By
 
